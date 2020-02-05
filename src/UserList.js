@@ -11,33 +11,30 @@ class UserList extends React.Component {
     }
   }
   componentDidMount(){
-        axios.get('https://node-fake-api.herokuapp.com/user/')
+       axios.get('https://node-fake-api.herokuapp.com/user/')
       .then(response => {
-        //console.log(response.data.data);
+        //console.log(response.data.data[0].id);
         this.setState({
           users:response.data.data
         })
-        console.log(this.state.users);
+        //console.log(this.state.users);
       })
       .catch(function (error) {
-        // handle error
         console.log(error);
       })
       .finally(function () {
-        // always executed
       });
-  }
-  
+}
   render(){
       return ( 
       <div className="userlist">
                   USER List
                   { this.state.users.map(user => 
-                  <button className="btn" onClick={}>
-                    {user.first_name+" "+user.last_name }
+                  <button key={user.id} className="btn" onClick={() => this.props.updateId(user.id)}>
+                    {user.first_name+" "+user.last_name}
                   </button>)}
-               
                 </div>
+              
     )}
 }
 
